@@ -8,23 +8,23 @@
                     <form method="POST" action="{% url "openach:join_team" team.id %}">
                         {% csrf_token %}
                         {% if team.members.all|length > 10 %}
-                            <a class="btn btn-default btn-sm" href="{% url 'openach:team_members' team.id %}">{% trans "View All" %}</a>
+                            <a class="btn btn-secondary btn-sm" href="{% url 'openach:team_members' team.id %}">{% trans "View All" %}</a>
                         {% endif %}
                         {% if pending_request %}
-                            <input class="btn btn-default btn-sm" type=submit value="{% trans 'Membership Pending' %}" disabled>
+                            <input class="btn btn-secondary btn-sm" type=submit value="{% trans 'Membership Pending' %}" disabled>
                         {% elif pending_invitation %}
-                            <input class="btn btn-default btn-sm" type=submit value="{% trans 'Accept Invitation' %}">
+                            <input class="btn btn-secondary btn-sm" type=submit value="{% trans 'Accept Invitation' %}">
                         {% elif team.invitation_required %}
-                            <input class="btn btn-default btn-sm" type=submit value="{% trans 'Request Membership' %}">
+                            <input class="btn btn-secondary btn-sm" type=submit value="{% trans 'Request Membership' %}">
                         {% else %}
-                            <input class="btn btn-default btn-sm" type=submit value="{% trans 'Join Team' %}">
+                            <input class="btn btn-secondary btn-sm" type=submit value="{% trans 'Join Team' %}">
                         {% endif %}
                     </form>
                 {% else %}
                     <form method="POST" action="{% url "openach:leave_team" team.id %}">
                         {% csrf_token %}
                         {% if team.members.all|length > 10 %}
-                            <a class="btn btn-default btn-sm" href="{% url 'openach:team_members' team.id %}">{% trans "View All" %}</a>
+                            <a class="btn btn-secondary btn-sm" href="{% url 'openach:team_members' team.id %}">{% trans "View All" %}</a>
                         {% endif %}
                         <input class="btn btn-danger btn-sm" type=submit value="{% trans 'Leave Team' %}">
                     </form>

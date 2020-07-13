@@ -27,7 +27,7 @@
           {% endblocktrans %}
         {% endif %}
 
-        <a class="btn btn-default" href="{% url 'profile' user.id %}">{% trans "View Account" %}</a>
+        <a class="btn btn-secondary" href="{% url 'profile' user.id %}">{% trans "View Account" %}</a>
     </h1>
 
     {% include 'boards/_board_table.html' %}

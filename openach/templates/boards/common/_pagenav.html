@@ -3,35 +3,35 @@
 
 <nav aria-label="{% trans "Page navigation" %}">
     <ul class="pagination">
-        <li class="{% if not paged.has_previous %}disabled{% endif %}">
+        <li class="page-item {% if not paged.has_previous %}disabled{% endif %}">
             {% if paged.has_previous %}
-                <a href="?{% url_replace request 'page' paged.previous_page_number %}" aria-label="{% trans "Previous" %}">
+                <a class="page-link" href="?{% url_replace request 'page' paged.previous_page_number %}" aria-label="{% trans "Previous" %}">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             {% else %}
-                <a href="#" aria-label="{% trans "Previous" %}">
+                <a class="page-link" href="#" aria-label="{% trans "Previous" %}">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             {% endif %}
         </li>
         {% for page in paged.paginator.page_range %}
             {% if page == paged.number %}
-                <li class="active">
-                    <a href="#">{{ page }} <span class="sr-only">{% trans "(current)" %}</span></a>
+                <li class="page-item active">
+                    <a class="page-link" href="#" >{{ page }} <span class="sr-only">{% trans "(current)" %}</span></a>
                 </li>
             {% else %}
-                <li>
-                    <a href="?page={{ page }}">{{ page }}</a>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
                 </li>
             {% endif %}
         {% endfor %}
-        <li class="{% if not paged.has_next %}disabled{% endif %}">
+        <li class="page-item {% if not paged.has_next %}disabled{% endif %}">
             {% if paged.has_next %}
-                <a href="?{% url_replace request 'page' paged.next_page_number %}" aria-label="{% trans "Next" %}">
+                <a class="page-link" href="?{% url_replace request 'page' paged.next_page_number %}" aria-label="{% trans "Next" %}">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             {% else %}
-                <a href="#" aria-label="{% trans "Next" %}">
+                <a class="page-link" href="#" aria-label="{% trans "Next" %}" >
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             {% endif %}

@@ -12,7 +12,7 @@
       {% endblocktrans %}
       </h1>
 
-    <div class="well">{{ board.board_desc }}</div>
+    <div class="card card-body bg-light">{{ board.board_desc }}</div>
 
     <h2>{% trans "Existing Hypotheses" %}</h2>
     <ul>
@@ -27,7 +27,7 @@
         {{ form|bootstrap }}
         <div class="form-group">
             <div class="">
-                <a class="btn btn-default" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>
+                <a class="btn btn-secondary" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>
                 <button type="submit" class="btn btn-primary">{% trans "Add Hypothesis" %}</button>
             </div>
         </div>

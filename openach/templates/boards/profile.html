@@ -11,37 +11,31 @@
     <div class="row">
         <div class="col-md-7">
 
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                      {% blocktrans trimmed with username=request.user.username %}
-                        Welcome, {{ username }}
-                      {% endblocktrans %}
-                    </h3>
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    {% blocktrans trimmed with username=request.user.username %}Welcome, {{ username }}{% endblocktrans %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     {% trans "Your private profile summarizes the content, alerts, etc. that are relevant to you." %}
                 </div>
             </div>
 
-            <div class="panel panel-info">
-                <div class="panel-heading clearfix">
+            <div class="card border-info mt-3">
+                <div class="card-header bg-info text-white clearfix">
                     {% if notifications|length > 0 %}
                         <div class="btn-group pull-right">
                             <form method="post" action="{% url 'openach:clear_notifications' %}">
                                 {% csrf_token %}
                                 {% if notifications|length > 5 %}
-                                <a class="btn btn-default btn-sm" href="{% url 'openach:notifications' %}">{% trans "View All" %}</a>
+                                <a class="btn btn-secondary btn-sm" href="{% url 'openach:notifications' %}">{% trans "View All" %}</a>
                                 {% endif %}
-                                <input class="btn btn-default btn-sm" name="clear" type="submit" value="{% trans "Clear" %}"/>
+                                <input class="btn btn-secondary btn-sm" name="clear" type="submit" value="{% trans "Clear" %}"/>
                             </form>
                         </div>
                     {% endif %}
-                    <h3 class="panel-title">{% trans "Notifications" %}
-                        <span class="badge">{{ notifications|length }}</span>
-                    </h3>
+                    {% trans "Notifications" %}<span class="badge badge-light">{{ notifications|length }}</span>
                 </div>
-                <ul class="list-group">
+                <ul class="list-group list-group-flush">
                     {% if notifications|length > 0 %}
                         {% for notification in notifications|slice:":5" %}
                             <li class="list-group-item">
@@ -54,15 +48,15 @@
                 </ul>
             </div>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Settings" %}</h3>
+            <div class="card border-info mt-3">
+                <div class="card-header bg-info text-white">
+                    {% trans "Settings" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <form method="post" action="/accounts/profile/">
                         {% csrf_token %}
                         {{ settings_form|bootstrap }}
-                        <input class="btn btn-default" type="submit" value="{% trans "Update Settings" %}"/>
+                        <input class="btn btn-secondary" type="submit" value="{% trans "Update Settings" %}"/>
                     </form>
                 </div>
             </div>
@@ -70,19 +64,19 @@
         </div> <!-- col -->
 
         <div class="col-md-5">
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
+            <div class="card">
+                <div class="card-header clearfix">
                     <div class="btn-group pull-right">
                         {% if boards_created and boards_created|length > 3 %}
-                            <a class="btn btn-default btn-sm" href="{% url 'openach:user_boards' request.user.id %}?query=created">
+                            <a class="btn btn-secondary btn-sm" href="{% url 'openach:user_boards' request.user.id %}?query=created">
                                 {% trans "View All" %}
                             </a>
                         {% endif %}
                         <a class="btn btn-primary btn-sm" href="{% url 'openach:create_board' %}">{% trans "Create" %}</a>
                     </div>
-                    <h3 class="panel-title">{% trans "Recent Boards You've Created" %}</h3>
+                    <span>{% trans "Recent Boards You've Created" %}</span>
                 </div>
-                <ul class="list-group">
+                <ul class="list-group list-group-flush">
                     {% if boards_created %}
                         {% for board in boards_created|slice:":3" %}
                             <li class="list-group-item">
@@ -95,16 +89,16 @@
                 </ul>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
+            <div class="card mt-3">
+                <div class="card-header clearfix">
                     {% if boards_contributed and boards_contributed|length > 3 %}
-                        <a class="btn btn-default btn-sm pull-right" href="{% url 'openach:user_boards' request.user.id %}?query=contributed">
+                        <a class="btn btn-secondary btn-sm pull-right" href="{% url 'openach:user_boards' request.user.id %}?query=contributed">
                             {% trans "View All" %}
                         </a>
                     {% endif %}
-                    <h3 class="panel-title">{% trans "Recent Boards You've Contributed To" %}</h3>
+                    {% trans "Recent Boards You've Contributed To" %}
                 </div>
-                <ul class="list-group">
+                <ul class="list-group list-group-flush">
                     {% if boards_contributed %}
                         {% for board in boards_contributed|slice:":3" %}
                             <li class="list-group-item"><a href="{{ board|board_url }}">{{ board.board_title }}</a></li>
@@ -115,16 +109,16 @@
                 </ul>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
+            <div class="card mt-3">
+                <div class="card-header clearfix">
                     {% if board_voted %}
-                        <a class="btn btn-default btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=evaluated">
+                        <a class="btn btn-secondary btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=evaluated">
                           {% trans "View All" %}
                         </a>
                     {% endif %}
-                    <h3 class="panel-title">{% trans "Recent Boards You've Analyzed" %}</h3>
+                    {% trans "Recent Boards You've Analyzed" %}
                 </div>
-                <ul class="list-group">
+                <ul class="list-group list-group-flush">
                     {% if board_voted %}
                         {% for board in board_voted|slice:":3" %}
                             <li class="list-group-item"><a href="{{ board|board_url }}">{{ board.board_title }}</a></li>

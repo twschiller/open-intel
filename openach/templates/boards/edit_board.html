@@ -15,7 +15,7 @@
         {{ form|bootstrap }}
         <div class="form-group">
             <div>
-                <a class="btn btn-default" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>&nbsp;
+                <a class="btn btn-secondary" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>&nbsp;
                 {% if allow_remove %}
                     <button type="submit" class="btn btn-danger" name="remove" value="remove">{% trans "Remove Board" %}</button>&nbsp;
                 {% endif %}

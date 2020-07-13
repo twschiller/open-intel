@@ -8,11 +8,11 @@
 
     <div class="row">
         <div class="col-md-7">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Welcome to the Open Synthesis Project!" %}</h3>
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    {% trans "Welcome to the Open Synthesis Project!" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <p>
                       {% blocktrans trimmed %}
                         Open Synthesis is an open platform for intelligence analysis. We're taking the best practices
@@ -34,11 +34,11 @@
                 </div>
             </div>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "New to the Analysis of Competing Hypotheses (ACH)?" %}</h3>
+            <div class="card border-info mt-3">
+                <div class="card-header bg-info text-white">
+                    {% trans "New to the Analysis of Competing Hypotheses (ACH)?" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                   {% blocktrans trimmed with art_url="https://www.cia.gov/library/center-for-the-study-of-intelligence/csi-publications/books-and-monographs/psychology-of-intelligence-analysis/art11.html" %}
                     Created at the <a href="{{ art_url }}">CIA</a>,
                     ACH is a simple tool for analyzing complex situations. To perform ACH for an analysis question,
@@ -53,11 +53,11 @@
 
         <div class="col-md-5">
             {% if latest_project_news %}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{% trans "Project News" %}</h3>
+                <div class="card">
+                    <div class="card-header">
+                        {% trans "Project News" %}
                     </div>
-                    <ul class="list-group">
+                    <ul class="list-group-flush">
                         {% for headline in latest_project_news %}
                             <li class="list-group-item">
                                 {{ headline.pub_date|date }}: {{ headline.content|urlize }}
@@ -67,15 +67,15 @@
                 </div>
             {% endif %}
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Most Recent Boards" %}</h3>
+            <div class="card">
+                <div class="card-header">
+                    {% trans "Most Recent Boards" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     {% trans "Want help analyzing a question?" %}
                     <a href="{% url 'openach:create_board' %}">{% trans "Create a board." %}</a>
                 </div>
-                <ul class="list-group">
+                <ul class="list-group list-group-flush">
                     {% if latest_board_list %}
                         {% for board in latest_board_list %}
                             <li class="list-group-item">

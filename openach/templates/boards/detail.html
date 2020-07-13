@@ -38,24 +38,24 @@
           {% endblocktrans %}
         {% endif %}
     </div>
-    <div class="well">{{ board.board_desc }}</div>
+    <div class="card card-body bg-light">{{ board.board_desc }}</div>
 
-    <div class="btn-toolbar" role="toolbar">
+    <div class="btn-toolbar mt-3" role="toolbar">
         {% if permissions|contains:'edit_board' or permissions|contains:'add_elements' %}
             <div class="btn-group" role="group" aria-label="{% trans "Board Actions" %}">
                 {% if permissions|contains:'edit_board' %}
-                    <a class="btn btn-default btn-sm" href="{% url 'openach:edit_board' board.id %}">{% trans "Edit Board" %}</a>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'openach:edit_board' board.id %}">{% trans "Edit Board" %}</a>
                 {% endif %}
                 {% if permissions|contains:'add_elements' %}
-                    <a class="btn btn-default btn-sm" href="{% url 'openach:add_evidence' board.id %}">{% trans "Add Evidence" %}</a>
-                    <a class="btn btn-default btn-sm" href="{% url 'openach:add_hypothesis' board.id %}">{% trans "Add Hypothesis" %}</a>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'openach:add_evidence' board.id %}">{% trans "Add Evidence" %}</a>
+                    <a class="btn btn-secondary btn-sm" href="{% url 'openach:add_hypothesis' board.id %}">{% trans "Add Hypothesis" %}</a>
                 {% endif %}
             </div>
         {% endif %}
 
         {% if board.creator_id == request.user.id  or request.user.is_staff %}
-            <div class="btn-group" role="group" aria-label="{% trans "Administrator Actions" %}">
-                <a class="btn btn-default btn-sm" href="{% url 'openach:edit_permissions' board.id %}">
+            <div class="btn-group ml-2" role="group" aria-label="{% trans "Administrator Actions" %}">
+                <a class="btn btn-secondary btn-sm" href="{% url 'openach:edit_permissions' board.id %}">
                     {% trans "Modify Permissions" %}
                 </a>
             </div>
@@ -78,53 +78,48 @@
                 {% else %}
                     ({% trans "All Evaluations" %})
                 {% endif %}
-                <div class="btn-group" role="group" aria-label="{% trans "View Actions" %}">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {% trans "Change View" %}
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{{ board|board_url }}?{% url_replace request 'view_type' 'aggregate' %}">
-                                    {% trans "Aggregate" %}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ board|board_url }}?{% url_replace request 'view_type' 'disagreement' %}">
-                                    {% trans "Disagreement" %}
-                                </a>
-                            </li>
-                            {% if request.user.is_authenticated %}
-                                <li>
-                                    <a href="{{ board|board_url }}?{% url_replace request 'view_type' 'comparison' %}">
-                                        {% trans "Comparison" %}
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </div>
-                    {% if board.has_collaborators %}
+                <div class="btn-toolbar" role="toolbar">
+
+                    <div class="btn-group" role="group" aria-label="{% trans "View Actions" %}">
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {% trans "Choose Evaluations" %}
+                            <button id="changeViewButton" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% trans "Change View" %}
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="{{ board|board_url }}?{% url_replace request 'vote_type' 'all' %}">
+                            <div class="dropdown-menu" aria-labelledby="changeViewButton">
+                                <a class="dropdown-item" href="{{ board|board_url }}?{% url_replace request 'view_type' 'aggregate' %}">
+                                    {% trans "Aggregate" %}
+                                </a>
+                                <a class="dropdown-item" href="{{ board|board_url }}?{% url_replace request 'view_type' 'disagreement' %}">
+                                    {% trans "Disagreement" %}
+                                </a>
+                                {% if request.user.is_authenticated %}
+                                    <a class="dropdown-item" href="{{ board|board_url }}?{% url_replace request 'view_type' 'comparison' %}">
+                                        {% trans "Comparison" %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if board.has_collaborators %}
+                            <div class="btn-group" role="group">
+                                <button id="changeEvaluationButton" type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {% trans "Choose Evaluations" %}
+                                    <span class="caret"></span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="changeViewButton">
+                                    <a class="dropdown-item"  href="{{ board|board_url }}?{% url_replace request 'vote_type' 'all' %}">
                                         {% trans "All Evaluations" %}
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="{{ board|board_url }}?{% url_replace request 'vote_type' 'collab' %}">
+                                    <a class="dropdown-item"  href="{{ board|board_url }}?{% url_replace request 'vote_type' 'collab' %}">
                                         {% trans "Collaborators" %}
                                     </a>
-                                </li>
-                            </ul>
-                        </div>
-                    {% endif %}
-                    <a class="btn btn-link btn-sm" href="{% url 'openach:board_history' board.id %}">{% trans "Board History" %}</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-link btn-sm" href="{% url 'openach:board_history' board.id %}">{% trans "Board History" %}</a>
+                    </div>
                 </div>
             </th>
             {% for hypothesis, inconsistency in hypotheses %}

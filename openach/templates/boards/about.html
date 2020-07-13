@@ -10,11 +10,11 @@
     <div class="row">
 
         <div class="col-md-7">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "How to Contribute" %}</h3>
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    {% trans "How to Contribute" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <p>
                       {% blocktrans trimmed with github_url="https://github.com/twschiller/open-synthesis" %}
                         The Open Synthesis Project is available open-source under the GNU Public License Version 3 on
@@ -46,11 +46,11 @@
                 </div>
             </div>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Content License" %}</h3>
+            <div class="card mt-3 border-info">
+                <div class="card-header bg-info text-white">
+                    {% trans "Content License" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <p>
                       {% blocktrans trimmed with site_name=site.name license_url="https://creativecommons.org/licenses/by-sa/4.0/" %}
                         Content on {{ site_name }} is licensed under a
@@ -67,11 +67,11 @@
             </div>
 
             {% if privacy_url %}
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{% trans "Privacy Policy" %}</h3>
+                <div class="card border-info">
+                    <div class="card-header bg-info text-white">
+                        {% trans "Privacy Policy" %}
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <p>
                           {% blocktrans trimmed with site_name=site.name %}
                             The {{ site_name }} privacy policy is available at
@@ -84,14 +84,12 @@
         </div>
 
         <div class="col-md-5">
-
             {% if bitcoin_address %}
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">{% trans "Donate" %}</h3>
+                <div class="card border-success">
+                    <div class="card-header">
+                        {% trans "Donate" %}
                     </div>
-                    <div class="panel-body">
-
+                    <div class="card-body">
                         <div class="media">
                             <div class="media-left">
                                 <a href="{{ bitcoin_donate_url }}">
@@ -110,11 +108,11 @@
                 </div>
             {% endif %}
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Reporting Bugs" %}</h3>
+            <div class="card">
+                <div class="card-header">
+                    {% trans "Reporting Bugs" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                   {% blocktrans trimmed with issues_url="https://github.com/twschiller/open-synthesis/issues" %}
                     Find a bug? The best way to report it is using <a href="{{ issues_url }}">GitHub Issues</a>.
                     However, you can also email us at <a href="mailto:bugs@opensynthesis.org">bugs@opensynthesis.org</a>.
@@ -122,11 +120,11 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Responsible Disclosure" %}</h3>
+            <div class="card mt-3">
+                <div class="card-header">
+                    {% trans "Responsible Disclosure" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <p>
                       {% blocktrans trimmed with pgp_url="https://keybase.io/tschiller" %}
                         If you find a security vulnerability in Open Synthesis, please privately report it to
@@ -145,11 +143,11 @@
                 </div>
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{% trans "Media Inquiries" %}</h3>
+            <div class="card mt-3">
+                <div class="card-header">
+                    {% trans "Media Inquiries" %}
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <p>
                       {% blocktrans trimmed %}
                         Are you a journalist or blogger interested in learning more about the Open Synthesis Project?

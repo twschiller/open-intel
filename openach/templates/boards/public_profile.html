@@ -39,7 +39,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     {% if boards_created %}
-                        <a class="btn btn-default btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=created">
+                        <a class="btn btn-secondary btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=created">
                             {% trans "View All" %}
                         </a>
                     {% endif %}
@@ -65,7 +65,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     {% if boards_contributed %}
-                        <a class="btn btn-default btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=contributed">
+                        <a class="btn btn-secondary btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=contributed">
                             {% trans "View All" %}
                         </a>
                     {% endif %}
@@ -89,7 +89,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     {% if board_voted %}
-                        <a class="btn btn-default btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=evaluated">
+                        <a class="btn btn-secondary btn-sm pull-right" href="{% url 'openach:user_boards' user.id %}?query=evaluated">
                             {% trans "View All" %}
                         </a>
                     {% endif %}

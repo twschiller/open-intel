@@ -13,7 +13,7 @@
         {{ form|bootstrap }}
         <div class="form-group">
             <div>
-                <a class="btn btn-default" href="{% url 'openach:evidence_detail' evidence.id %}">{% trans "Return to Evidence" %}</a>
+                <a class="btn btn-secondary" href="{% url 'openach:evidence_detail' evidence.id %}">{% trans "Return to Evidence" %}</a>
                 {% if allow_remove %}
                     <button type="submit" class="btn btn-danger" name="remove" value="remove">{% trans "Remove Evidence" %}</button>&nbsp;
                 {% endif %}

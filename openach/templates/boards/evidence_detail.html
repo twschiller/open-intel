@@ -31,16 +31,16 @@
           {% endblocktrans %}
         {%  endif %}
     </div>
-    <div class="well">{{ evidence.evidence_desc }}</div>
+    <div class="card card-body bg-light">{{ evidence.evidence_desc }}</div>
 
     <div>
         <a class="btn btn-primary" href="{% url 'openach:add_source' evidence.id %}?kind=corroborate">{% trans "Add Corroborating Source" %}</a>&nbsp;
         <a class="btn btn-warning" href="{% url 'openach:add_source' evidence.id %}?kind=conflicting">{% trans "Add Conflicting Source" %}</a>&nbsp;
         {% can_edit request evidence.board evidence as editable %}
         {% if editable %}
-            <a class="btn btn-default" href="{% url 'openach:edit_evidence' evidence.id %}">{% trans "Edit Evidence" %}</a>&nbsp;
+            <a class="btn btn-secondary" href="{% url 'openach:edit_evidence' evidence.id %}">{% trans "Edit Evidence" %}</a>&nbsp;
         {% endif %}
-        <a class="btn btn-default" href="{{ evidence.board|board_url }}">{% trans "Return to Board" %}</a>
+        <a class="btn btn-secondary" href="{{ evidence.board|board_url }}">{% trans "Return to Board" %}</a>
     </div>
 
     <table class="table table-hover">
@@ -89,7 +89,7 @@
                         {% for tag in available_tags %}
                             {% get_source_tags user_tags source.id tag.id as tag_count %}
                             <input type="submit" name="tag" value="{{ tag.tag_name }}"
-                                   class="btn btn-default btn-xs {% if tag_count %}active{% endif %}"/>
+                                   class="btn btn-secondary btn-xs {% if tag_count %}active{% endif %}"/>
                         {% endfor %}
                     </form>
                 </td>

@@ -12,14 +12,14 @@
       {% endblocktrans %}
     </h1>
 
-    <div class="well">{{ board.board_desc }}</div>
+    <div class="card card-body bg-light">{{ board.board_desc }}</div>
 
     <form action="{% url 'openach:edit_hypothesis' hypothesis.id %}" method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
         <div class="form-group">
             <div class="">
-                <a class="btn btn-default" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>&nbsp;
+                <a class="btn btn-secondary" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>&nbsp;
                 {% if allow_remove %}
                     <button type="submit" class="btn btn-danger" name="remove" value="remove">{% trans "Remove Hypothesis" %}</button>&nbsp;
                 {% endif %}

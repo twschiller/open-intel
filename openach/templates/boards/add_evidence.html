@@ -12,7 +12,7 @@
       {% endblocktrans %}
     </h1>
 
-    <div class="well">{{ board.board_desc }}</div>
+    <div class="card card-body bg-light">{{ board.board_desc }}</div>
 
     <form action="{% url 'openach:add_evidence' board.id %}" method="post">
         {% csrf_token %}
@@ -20,7 +20,7 @@
         {{ source_form|bootstrap }}
         <div class="form-group">
             <div>
-                <a class="btn btn-default" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>
+                <a class="btn btn-secondary" href="{{ board|board_url }}">{% trans "Return to Board" %}</a>
                 <button type="submit" class="btn btn-primary">{% trans "Add Evidence" %}</button>
             </div>
         </div>

@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
     <title>{% block title %}{% endblock %}</title>
     {% include 'boards/_meta.html' %}
 
@@ -25,59 +25,51 @@
 <body>
 <div class="container">
     <!-- Static navbar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">{{ site.name }}</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{% url 'openach:index' %}">{% trans "Home" %}</a></li>
-                    <li><a href="{% url 'openach:about' %}">{% trans "About" %}</a></li>
-                    <li><a href="{% url 'openach:boards' %}">{% trans "Boards" %}</a></li>
-                    <li><a href="{% url 'openach:teams' %}">{% trans "Teams" %}</a></li>
-                    {% if request.user.is_authenticated %}
-                        <li>
-                            <a href="/accounts/profile">{% trans "Profile" %}
-                                <span class='badge'
-                                      data-notify-api-url="{% url 'notifications:live_unread_notification_count' %}">0
-                                </span>
-                            </a>
-                        </li>
-                        <li><a href="/accounts/logout">{% trans "Logout" %}</a></li>
-                    {% else %}
-                        <li><a href="/accounts/login">{% trans "Login" %}</a></li>
-                    {% endif %}
-                    <li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'openach:index' %}">{{ site.name }}</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="navbarSupportedContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a href="{% url 'openach:index' %}" class="nav-link">{% trans "Home" %}</a></li>
+                <li class="nav-item"><a href="{% url 'openach:about' %}" class="nav-link">{% trans "About" %}</a></li>
+                <li class="nav-item"><a href="{% url 'openach:boards' %}" class="nav-link">{% trans "Boards" %}</a></li>
+                <li class="nav-item"><a href="{% url 'openach:teams' %}" class="nav-link">{% trans "Teams" %}</a></li>
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="/accounts/profile" class="nav-link">{% trans "Profile" %}
+                            <span class="badge badge-secondary"
+                                  data-notify-api-url="{% url 'notifications:live_unread_notification_count' %}">0
+                            </span>
+                        </a>
                     </li>
-                </ul>
-                <div class="navbar-form navbar-left navbar-search">
-                    <div class="form-group">
-                        <input id="board-search" type="text" class="form-control" placeholder="{% trans "Search" %}">
-                    </div>
-                </div>
-                {% if languages|length > 1 %}
-                <form class="navbar-form navbar-right navbar-language" name="switchLanguageForm"
-                      action="{% url 'set_language' %}" method="post">
+                    <li class="nav-item"><a href="/accounts/logout" class="nav-link">{% trans "Logout" %}</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="/accounts/login" class="nav-link">{% trans "Login" %}</a></li>
+                {% endif %}
+            </ul>
+
+            <form class="form-inline">
+                <input id="board-search" type="search" class="form-control" placeholder="{% trans "Search" %}" aria-label="{% trans "Search" %}">
+            </form>
+
+            {% if languages|length > 1 %}
+                <form class="form-inline" name="switchLanguageForm" action="{% url 'set_language' %}" method="post">
                     {% csrf_token %}
                     <input name="next" type="hidden" value="{{ redirect_to }}" />
                     <select name="language" class="form-control selectize">
                         {% for language in languages %}
-                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
-                            {{ language.name_local }} ({{ language.code }})
-                        </option>
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
                         {% endfor %}
                     </select>
                 </form>
-                {% endif %}
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+            {% endif %}
+        </div>
     </nav>
 </div> <!-- /container -->
 

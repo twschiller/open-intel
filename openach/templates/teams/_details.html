@@ -5,7 +5,7 @@
     <div class="panel-heading clearfix">
         {% if request.user.is_authenticated and request.user == team.owner %}
             <div class="btn-group pull-right">
-                <a class="btn btn-default btn-sm" href="{% url 'openach:edit_team' team.id %}">{% trans "Edit Details" %}</a>
+                <a class="btn btn-secondary btn-sm" href="{% url 'openach:edit_team' team.id %}">{% trans "Edit Details" %}</a>
             </div>
         {% endif %}
         <h3 class="panel-title">
